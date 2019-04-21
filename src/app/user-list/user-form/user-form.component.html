@@ -1,0 +1,29 @@
+<form [formGroup]="form">
+
+  <app-input label="Nome" errorMessage="Esse campo é obrigatorio">
+    <input type="text" class="form-control" formControlName="name" placeholder="Nome">
+  </app-input>
+
+  <app-input label="CPF" errorMessage="Esse campo é obrigatorio e no formato XXX.XXX.XXX-XX">
+    <input type="text" class="form-control" placeholder="111.111.111-11" formControlName="cpf">
+  </app-input>
+
+  <app-input label="UF" errorMessage="Esse campo é obrigatorio">
+    <select class="form-control" formControlName="uf">
+      <option *ngFor="let uf of ufs" [value]="uf.sigla">{{uf.nome}}</option>
+    </select>
+  </app-input>
+
+  <app-input label="Data de nascimento">
+    <input type="date" class="form-control" formControlName="birth">
+  </app-input>
+
+  <app-input label="Peso">
+    <input type="number" class="form-control" formControlName="weight">
+  </app-input>
+
+  <div class="btn-group">
+    <a class="btn btn-light" [routerLink]="[ '/usuarios' ]">Voltar</a>
+    <button type="submit" [disabled]="!form.valid" class="btn btn-primary" (click)="save(form.value)">Salvar</button>
+  </div>
+</form>

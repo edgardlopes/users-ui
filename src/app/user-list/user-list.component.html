@@ -1,0 +1,38 @@
+<div class="clear">
+  <a class="btn btn-success float-right" [routerLink]="[ '/usuarios/novo' ]">Novo</a>
+  <div class="table-responsive">
+    <table class="table table-hover table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Data de Nascimento</th>
+          <th scope="col">CPF</th>
+          <th scope="col">UF</th>
+          <th scope="col">Peso</th>
+          <th style="width: 100px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of page?.content" >
+          <td>{{user.name}}</td>
+          <td>{{user.birth | date: 'dd/MM/yyyy'}}</td>
+          <td>{{user.cpf}}</td>
+          <td>{{user.uf}}</td>
+          <td>{{user.weight}}</td>
+          <td>
+            <div class="btn-group" >
+              <a class="btn btn-sm btn-info" [routerLink]="[ '/usuarios', user.id ]">Alterar</a>
+              <button class="btn btn-sm btn-danger" (click)="delete(user.id)">Excluir</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <nav>
+    <ul class="pager">
+      <li class="previous " *ngIf="!page?.first"><a [routerLink]="['/usuarios']" [queryParams]="{size:page?.size, page:page?.number-1}"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="next" *ngIf="!page?.last"><a [routerLink]="['/usuarios']" [queryParams]="{size:page?.size, page:page?.number+1}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+  </nav>
+</div>
